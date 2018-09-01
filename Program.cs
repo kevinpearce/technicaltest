@@ -8,7 +8,7 @@ namespace CSharp
     {
         static void printStuffFromArray(int[] array)
         {
-            int highest = 0;
+            int highest = 0, record = 0, rolling = 0, lastNum = 0;
             Dictionary <int, int> tally = new Dictionary <int, int>();
 
             foreach (int i in array)
@@ -32,13 +32,27 @@ namespace CSharp
                 }
 
                 // consecutive repeats
-                // not attempted
+                if (i != lastNum)
+                {
+                    lastNum = i;
+                    rolling = 1;
+                }
+                else
+                {
+                    rolling ++;
+                }
+                
+                if (record < rolling)
+                {
+                    record = rolling;
+                }
             }
             
+            //exports results
             Console.WriteLine("Highest Number : " + highest);
-            Console.Write("Instances : [");
 
             var myStringBuilder = new StringBuilder();
+            myStringBuilder.Append("Instances : [");
             bool test = true;
             foreach(var item in tally)
             {
@@ -52,15 +66,16 @@ namespace CSharp
                 }
                 myStringBuilder.AppendFormat("{0}x{1}", item.Value, item.Key);
             }
+            myStringBuilder.Append("]\n");
             Console.Write(myStringBuilder.ToString());
-            Console.Write("]\n");
+            // Console.Write("]\n");
+            Console.WriteLine("Most Consecutive Instances: " + record);
         }
 
         static void Main(string[] args)
         {
-            int[] testArray = new int[] {1, 10, 7, 6, 1, 7, 7, 8, 8, 8, 5, 1};
+            int[] testArray = new int[] {1, 10, 7, 6, 1, 7, 7};
             printStuffFromArray(testArray);
-
         }
     }
 }
