@@ -68,7 +68,6 @@ namespace CSharp
             }
             myStringBuilder.Append("]\n");
             Console.Write(myStringBuilder.ToString());
-            // Console.Write("]\n");
             Console.WriteLine("Most Consecutive Instances: " + record);
         }
 
